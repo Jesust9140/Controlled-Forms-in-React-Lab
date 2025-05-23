@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 const Bookshelf = () => {
-  // 2. Define the initial state
   const [books, setBooks] = useState([
     { title: 'Fourth Wing', author: 'Rebecca Yarros' },
     { title: 'The Lion, the Witch and the Wardrobe', author: 'C.S. Lewis' },
@@ -15,12 +14,16 @@ const Bookshelf = () => {
       ...newBook,
       [name]: value,
     });
+    console.log(`Input changed: ${name} = ${value}`);
+    console.log('Current newBook state:', { ...newBook, [name]: value });
   };
 
   // 3b. handleSubmit
   const handleSubmit = (event) => {
     event.preventDefault();
     setBooks([...books, newBook]);
+    console.log('Book added:', newBook);
+    console.log('Books array after addition:', [...books, newBook]);
     setNewBook({ title: '', author: '' });
   };
 
@@ -28,7 +31,6 @@ const Bookshelf = () => {
     <div className="bookshelfDiv">
       <div className="formDiv">
         <h3>Add a Book</h3>
-        {/* 4. Form creation */}
         <form onSubmit={handleSubmit}>
           <label>
             Title:
@@ -54,7 +56,6 @@ const Bookshelf = () => {
         </form>
       </div>
       <div className="bookCardsDiv">
-        {/* 5. Map through your books */}
         {books.map((book, idx) => (
           <div className="bookCard" key={idx}>
             <strong>{book.title}</strong>
